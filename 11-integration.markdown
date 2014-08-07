@@ -285,6 +285,74 @@ Using Angular's declarative properties and directives, you can easily use it wit
 ```
 
 
+If you want to be able to use ChocolateChip-UI's gestures as directives, you can import the following module into your app, then inject the gestures you wish to use in your app's module. We use the prefix "cc" for ChocolateChip to distinguish these directives from others:
+
+
+```
+///////////////////////////////////////////////////
+// Create directives for ChocolateChip-UI gestures.
+// Iterate over array of avaialable events:
+///////////////////////////////////////////////////
+['tap', 'singletap', 'longtap', 'doubletap', 'swipe', 'swipeleft', 
+'swiperight', 'swipeup', 'swipedown'].forEach(function(gesture) {
+
+  // Camel Case each directive:
+  //===========================
+  var ccGesture = 'cc' + (gesture.charAt(0).toUpperCase() + gesture.slice(1));
+
+  // Create module for each directive:
+  //==================================
+  angular.module(ccGesture,[]).directive(ccGesture, ['$parse',
+    function($parse) {
+      return {
+        // Restrict to attribute:
+        restrict: 'A',
+        compile: function ($element, attr) {
+          // Define the attribute for the gesture:
+          var fn = $parse(attr[ccGesture]);
+          return function ngEventHandler(scope, element) {
+            // Register event for directive:
+            $(element).on(gesture, function (event) {
+              scope.$apply(function () {
+                fn(scope, {$event: event});
+              });
+            });
+          };
+        }
+      };
+    }
+  ]);
+});
+```
+
+
+With the above module imported into your app you can inject the gestures as follows:
+
+
+```
+var app = angular.module('MyApp', ['ccSingletap', 'ccDoubletap', 'ccSwipe']);
+```
+
+With these injected into your app, you can then use them like normal Angularjs event directives:
+
+```
+<li ng-repeat="item in list" cc-singletap='respondToSingleTap(item)' cc-swipe='respondeToSwipe(item)'></li>
+```
+
+You could then define the method on your controller's scope:
+
+```
+app
+.controller('MyCtrl', function($scope){
+  $scope.respondToSingleTap = function(item) {
+    alert('You single tapped on: ' + item)
+  };
+  $scope.respondToSwipe = function(item) {
+    alert('You swiped on: ' + item)
+  };
+});
+```
+
 
 ###Phonegap
 
