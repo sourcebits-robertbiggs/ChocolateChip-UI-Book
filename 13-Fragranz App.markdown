@@ -2,7 +2,7 @@
 
 ##Building Fragranž
 
-In this Chapter we'll look at how to build out an app for exploring perfumes and colones for women, men and kids. Since there are three groups, the fragrances need to be navigable based on that. After selecting a genre, the user gets that collection filtered. Tapping a list item would lead the user to a detail view for that fragrance. The user could choose to add it to the shopping cart. At the shopping cart the user would be able to place an order, or cancle it. Of course at any time the user can use back navigation to return to any earlier screen.
+In this Chapter we'll look at how to build out an app for exploring fragrances for women, men and kids. The app will be called `Fragranž`. Since there are three groups, the fragrances need to be navigable based on that. After selecting a genre, the user gets that collection filtered from the total collection of available fragrances. Tapping a list item would lead the user to a detail view for that fragrance. The user could choose to add it to the shopping cart. At the shopping cart the user would be able to place an order, or cancel it. Of course at any time the user can use back navigation to return to any earlier screen.
 
 We are not going to create a real shopping cart, as this is about conceptual parts to create and app. A fully functioning shopping cart is beyond the scope of this tutorial.
 
@@ -1118,7 +1118,7 @@ $(function () {
     // Publish update for confirmation view:
     $.publish('update-confirmation-view', app.cart.scope.purchases);
   });
-
+  
   //================================
   // UpdateConfirmationMediator
   // Update the confirmation page
