@@ -106,8 +106,49 @@ $(function() {
 ```
 
 
+$(select).UIEditList (Version 3.7.0 and later)
 
-##$.UIDeletable
+As of version 3.7.0, ChocolateChip-UI offers the ability to create editable list where the user can delete items or change their order. Using a callback on the Done button, you can persist those changes. To make a list deletable, just execute `UIEditList` on it and pass it a number of options. Possible options are, a name for the Edit button, Done button, Delete button, and a callback to execute when the user is done. You can also set two flags -- `deletable` or `movable` tof false to limit the edit functionality to one or the other. This is useful where you only want the user to be able to either reorder or delete items in a list, but not both. By default both are enabled. The values for the buttons are to enable localization, otherwise the deraults will be used.
+
+Here's an example of an editable list initialization. When the user taps the Done button we will create an array of the values of the data attributes `data-list-item-value` and then store that in localStorage. You can see a working example of this in the examples folder of ChoclateChip-UI.
+
+```
+var editableListOptions = {
+  // Uncomment either of these to
+  // disable movable or deletable:
+  // movable: false,
+  // deletable: false,
+
+  // Define callback for "Done" button:
+  callback: function(item) {
+    var tempArray = [];
+
+    // Cycle through list items and get their data,
+    // pushing it to tempArray:
+    //=============================================
+    $('#editList').find('li').each(function(_, ctx) {
+      tempArray.push($(ctx).attr('data-list-item-value'));
+    });
+
+    // Convert the array to a string so we
+    // can store it in localStorage:
+    //=====================================
+    tempArray = "'" + JSON.stringify(tempArray) + "'";
+    try {
+      localStorage.setItem('chosen-items', tempArray);
+    } catch(err) {
+      return
+    }
+  }
+};
+$('#editList').UIEditList(editableListOptions);
+```
+
+
+
+
+
+##$.UIDeletable (version 3.6.3 and earlier)
 
 This method will enable the deletion of list items. It does this by inserting an 'Edit' button on the right side of the nav. You can also provide a callback to execute when and item is deleted.
 
@@ -150,9 +191,6 @@ Then later, after adding more items to the deletable list you can reinitialize i
 initDeletables();
 
 ```
-
-
-
 
 ##$.UIPaging
 
@@ -1165,5 +1203,64 @@ The dimensions of the carousel are controlled by CSS, so you can change the heig
   width: 320px;
   height: 300px;
 }
+```
+
+
+##UIHorizontalScrollPanel
+
+As of version 3.7.0, ChocolateChip-UI offers a way to create horizontal scroll panels. These are different from the snap carousels that ChocolateChip-UI has in that their movement is fluid. They do not snap to items. The horizontal scroll panel is particularly useful for table layouts were you want to present the user with more content than can fit in the viewing area of the screen. 
+
+The horizontal scroll panel expects an unordered list as the container for the panels that it will display. These can be styles to whatever dimensions work for the content you are using. To enable a horizontal scroll panel, you execute this method on the parent, a div, that holds the unordered list:
 
 ```
+<nav class="current">
+  <h1>Horizontal Scroll Panel</h1>
+</nav>
+<article id="main" class="current">
+  <section>
+    <div class='horizontal-scroll-panel'>
+      <ul>
+        <li><img src='./pics/pic-01.jpg'></li>
+        <li><img src='./pics/pic-02.jpg'></li>
+        <li><img src='./pics/pic-03.jpg'></li>
+        <li><img src='./pics/pic-04.jpg'></li>
+        <li><img src='./pics/pic-05.jpg'></li>
+        <li><img src='./pics/pic-06.jpg'></li>
+        <li><img src='./pics/pic-07.jpg'></li>
+        <li><img src='./pics/pic-08.jpg'></li>
+        <li><img src='./pics/pic-09.jpg'></li>
+      </ul>
+    </div> 
+  </section>
+</article>
+```
+
+To make this list a scroll panel, we just execute the following:
+
+```
+$('.horizontal-scroll-panel').UIHorizontalScrollPanel();
+```
+
+###BindData
+
+As of version 3.7.0, ChocolateChip-UI offers a simple way to set up one-way data binding between from elements and static parts of the UI. This is done by the use of two attrbites: `data-controller` and `data-model`. You put `data-controller` on a form element, and `data-model` on the part of the UI where you want that value to be displayed. Both attributes need to have the same value so that ChocolateChip-UI can establish the relationship between them.
+
+```
+<ul class="list">
+  <li><lable>Enter data:</lable> 
+    <input id='myText' data-controller='input-value' type='text'></li>
+  <li>
+    <h3 data-model='input-value'></h3>
+  </li>
+</ul>
+```
+
+To establish all of your data bindings, all you need to do is execute the following method at load time or at anyother time in your app's life cycle:
+
+```
+$.UIBindData();
+```
+
+This method will then scan the document for data-controlers and data-models. When it finds matches, it automatically creates delegated events that publish broadcasts with data when their values change. Similarly, it automatically creates mediators that listen for those broadcasts and update their data-model targets when they are received. To learn about more complex data binding setups, please read the chapter: "Mediators, Pub/Sub and Data Binding".
+
+

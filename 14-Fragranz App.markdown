@@ -11,13 +11,9 @@ The work flow will be like this:
 
 ```
 main screen (women, men, kids) =>
-
 chosen genre of fragrance =>
-
 chosen fragrance =>
-
 shopping cart =>
-
 confirmation page
 ```
 
@@ -28,19 +24,19 @@ Our app will have five screens that the user can navigate to complete a purchase
 
 Since this is a very complex layout, we are going to need some sophisticated templates that will enable us to create everything dynamically as the user makes choices. That are lots of good choices for this. We're going to use [Soma-template](https://soundstep.github.io/soma-template/). The reason we chose this one is because it is closely modeled after the way Angularjs handles templating. It provides tokens, repeaters and scopes just like the Angularjs ones. You also have the ability to write custom template helpers, similar to Angular's filters. Soma-template has two big advantages over Angular: size and speed. Soma-template minified is only 27kb. In performance tests on www.jsperf.com it renders really efficiently. 
 
-To make Soma-templates work with ChocolateChip-UI's touch and gesuture modules, we had to extend the Soma-template data events through its settings interface. This enables use to use `data-singletap` in our templates to use ChocolateChip-UI's `singletap` event.
+To make Soma-template work with ChocolateChip-UI's touch and gesuture modules, we had to extend the Soma-template data events through its settings interface. This enables use to use `data-singletap` in our templates to use ChocolateChip-UI's `singletap` event.
 
-For this example we are going to create mediators using ChocolateChip-UI's pub/sub methods. This will allow us to publish events with data and define listeners that will react when the receive the broadcasts. As a developer, you would of course follow whatever design patterns you prefer or are supported by the backend and libraries you need for your models and controllers. 
+For this example we are going to create mediators using ChocolateChip-UI's pub/sub methods. We saw how these worked in the previous chapter. This will allow us to publish events with data and define listeners that will react when the receive the broadcasts. As a developer, you would of course follow whatever design patterns you prefer or are supported by the backend and libraries you need for your models and controllers. 
 
-It is possible to create and app where you can switch out the theme to support different operating systems. You can learn more about how to do this in Chapter 11. Here we're going to keep it simple and just persent how to put together an app with the iOS theme. Because of that the screenshots and app icons will be for iOS. Android and Windows Phone 8 would require icons and other resources with dimensions appropriate for those platforms. 
+It is possible to create an app where you can switch out the theme to support different operating systems. You can learn more about how to do this in Chapter 11. Here we're going to keep it simple and just persent how to put together an app with the iOS theme. Because of that the screenshots and app icons will be for iOS. Android and Windows Phone 8 would require icons and other resources with dimensions appropriate for those platforms. 
 
-We modified the source code for this apps theme by changing color values in the LESS files, to create a rich, warm red color. Please read Chapter 10 Themes. By modifying just a few colors values in the colors.less file of a theme, you can create a beautiful custom theme with the colors you want for your app.
+We modified the source code for this app's theme by changing color values in the LESS files, to create a rich, warm red color. Please read Chapter 10 Themes. By modifying just a few colors values in the colors.less file of a theme, you can create a beautiful custom theme with the colors you want for your app.
 
 ##Getting Started
 
 This project with all its resources is available on [Github](https://github.com/sourcebits-robertbiggs/Fragranz) for download.
 
-To start, we need to create the basic shell for our app. This will consist of links to all the resources our app will need. We are using linking to all the icon and startup images with different sizes. Then we includ all the files for ChocolateChip: chui-ios-3.6.1.css, style.css (app styles), jquery-2.1.1.min.js, chui-3.6.1.js, soma-template.js, app.js.
+To start, we need to create the basic shell for our app. This will consist of links to all the resources our app will need. We are using links to all the icon and startup images with different sizes. Then we include all the files for ChocolateChip: chui-ios-3.6.1.css, style.css (app styles), jquery-2.1.1.min.js, chui-3.6.1.js, soma-template.js, app.js.
 
 Styles.css will hold styles specifically for the app and app.js will hold all the JavaScript to create the interactions of the app.
 
@@ -83,7 +79,7 @@ Startup screen:
 ![View of available genres](images/fragranz/launch-screen.png);
 
 
-To the body tag we'll add our first navbar:
+To the body tag we'll add our first navigation bar:
 
 ```
 <nav class='current'>
@@ -159,12 +155,12 @@ Each object has:
 - product title
 - wholesale price
 
-Normally, we would want to filter the entire array to extract all possible genres, then reduce the result to unique values. In this case we will not do that since we know that there are only three genres. We just create a simple array for genres in your code to handle them.
+Normally, we would want to filter the entire array to extract all possible genres, then reduce the result to unique values. In this case we will not do that since we know that there are only three genres. We just create a simple array for genres in the code to handle them.
 
 ####Showing the List of Genres
 
 
-Now that we know the data, let's see how to create our first template. Like Angularjs, Mustache and Handlebars, Soma-templates uses double curly braces to delimit a token. And like Angularjs, Soma provides a repeater to output the items of an array. The repeater's format is like Angularjs where you use a "key in object" type of iteration. The root of our template will be the list with id of "fragranceGenres". When we initialize a template of the name "fragranceGenres", we'll be able to add to its scope to make those things available to the template. Take a look at the following markup:
+Now that we know the data, let's see how to create our first template. Like Angularjs, Mustache and Handlebars, Soma-template uses double curly braces to delimit a token. And like Angularjs, Soma provides a repeater to output the items of an array. The repeater's format is like Angularjs where you use a "key in object" type of iteration. The root of our template will be the list with id of "fragranceGenres". When we initialize a template of the name "fragranceGenres", we'll be able to add to its scope to make those things available to the template. Take a look at the following markup:
 
 
 ```
@@ -200,7 +196,7 @@ The render method will cause the parsed template to be rendered in the browser. 
 
 ####Defining a Template Helper
 
-When we defined our array for genres, we used text that was all lower case. That's because we will use those values in programatic ways to filter the array of frangrances based on the genre choice the user makes. But for our list, we want the text to be capitalized. We can create a helper method for our templates that will capitalize the text. Soma-templates has an interface for create template helpers:
+When we defined our array for genres, we used text that was all lower case. That's because we will use those values in programatic ways to filter the array of frangrances based on the genre choice the user makes. But for our list, we want the text to be capitalized. We can create a helper method for our templates that will capitalize the text. Soma-template has an interface for creating template helpers:
 
 ```
 //=================================
@@ -229,9 +225,9 @@ If we load our app in it's current state in a browser, we will see the following
 
 ![View of available genres](images/fragranz/genres.png)
 
-Nice! We've got the first view rendering. Now we need to make the list so that it can navigate to the next vew where all the fragrances of the chosen genre will be presented. That needs another navbar/article and some attributes in our genre template. To make the list items navigate, we need to put the ChocolateChip-UI `data-goto` attributes with a value pointing to the article. In this case we're going to direct the user to the article "fragranceList". 
+Nice! We've got the first view rendering. Now we need to make the list so that it can navigate to the next vew where all the fragrances of the chosen genre will be presented. That needs another navbar/article and some attributes in our genre template. To make the list items navigate, we need to put the ChocolateChip-UI `data-goto` attribute on each list item with a value pointing to the article. In this case we're going to direct the user to the article "fragranceList". 
 
-You might notice that when this page loads, for a brief moment you can see the curly braces before the browser renders the template. We can avoid this by using the class `data-clock`. Like its namesake in Angularjs, we can use this to hide an element until it is rendered. We just add it as a class. In the style.css file we define the class to display none. When Soma-template see that class, after rendering the template it will remove the class, cause the template to appear fully rendered.
+You might notice that when this page loads, for a brief moment you can see the curly braces before the browser renders the template. We can avoid this by using the class `data-clock`. Like its namesake in Angularjs, we can use this to hide an element until it is rendered. We just add it as a class. In the style.css file we define the class to display none. When Soma-template see that class, after rendering the template it will remove the class, which will cause the template to appear fully rendered.
 
 ```
 .data-cloak {
@@ -253,7 +249,7 @@ Now we need to create a means of displaying fragrances based on which genre the 
 });
 ```
 
- Now we can use the single tap gesture on the template to execute a method defined on the template's scope. This method will determine which genre the user choice. Here's how our template will look now:
+ Now we can use the single tap gesture on the template to execute a method defined on the template's scope. This method will determine which genre the user chose. Here's how our template will look now:
 
 ```
 <ul class='list' id='fragranceGenres'>
@@ -313,9 +309,9 @@ Before we define the `getGenre()`, we need to create the template that it will a
 </article>
 ```
 
-Notice that in the navbar we have a token for the title. This will be the value of the genre the user chose. We have another repeater on the list "available_fragrances". The list items will contain details about each fragrance: name, description, image, price, etc. This output needs to be filtered from the array based on genre. That's where our previous template's properties come into play. `data-singletap='getGenre()` will allow us to grab the genre, filter out all fragrances that do not match the genre, then pass this filtered array to this template to loop and render.
+Notice that in the navigation bar we have a token for the title. This will be the value of the genre the user chose. We have another repeater on the list "available_fragrances". The list items will contain details about each fragrance: name, description, image, price, etc. This output needs to be filtered from the array based on genre. That's where our previous template's properties come into play. `data-singletap='getGenre()` will allow us to grab the genre, filter out all fragrances that do not match the genre, then pass this filtered array to this template to loop and render.
 
-To do the data passing, we're going to use ChocolateChip-UI's pub/sub methods to define mediators. In front in development, mediators are objects that represent another object. In this case they will be used to pass data from one template to another as the user interacts with them. We'll broadcast two events with data: 'chosen-genre-title' and 'chosen-genre'.
+To do the data passing, we're going to use ChocolateChip-UI's pub/sub methods to define mediators. In front end development, mediators are objects that represent another object. In this case they will be used to pass data from one template to another as the user interacts with them. We'll broadcast two events with data: 'chosen-genre-title' and 'chosen-genre'.
 
 
 ```
@@ -351,7 +347,7 @@ app.fragrancesGenreTitle = soma.template.create($('#fragrancesGenreTitle')[0]);
 app.available_fragrances = soma.template.create($('#available_fragrances')[0]);
 ```
 
-With the templates now instantiated, we can define mediators that will listen for the events broadcast by the user when making a genre choice. These two mediators list for their respective broadcasts and respond appropriately, binding the correct data to each template and then rendering it. When we subscribe to a topic, the callback gets two values: the topic and any data broadcast with it.
+With the templates now instantiated, we can define mediators that will listen for the events broadcast by the user when making a genre choice and respond appropriately, binding the correct data to each template and then rendering it. When we subscribe to a topic, the callback gets two values: the topic and any data broadcast with it.
 
 ```
 //==========================================
@@ -392,9 +388,9 @@ Kids:
 
 ####The Detail View
 
-On our above list for available fragrances we have another `data-goto` property on the list items. This time its pointing to another article with an id of "detail". This will be the detail view for the chosen fragrance. Only the chosen frangrance will be displayed. Since each fragrance has an SKU, we output that on the list with the `data-sku` property. This is so we can access that property to identify which fragrance it is when the user taps the list item. We also have attached a template as we did in the previous list, but here we've put the method `getChosenFragrance()`. Like `getGenre()`, this will be executed on the scopoe of this template, so we'll need to define it on its template as we did with `getGenre()`.
+On our above list for available fragrances we have another `data-goto` property on the list items. This time its pointing to another article with an id of "detail". This will be the detail view for the chosen fragrance. Only the chosen frangrance will be displayed. Since each fragrance has an SKU, we output that on the list with the `data-sku` property. This is so we can access that property to identify which fragrance it is when the user taps the list item. We also have attached a template as we did in the previous list, but here we've put the method `getChosenFragrance()`. Like `getGenre()`, this will be executed on the scope of this template, so we'll need to define it on its template as we did with `getGenre()`.
 
-Next lets put together the navbar and article for the detail view. We also need to include a toolbar after the article. This will hold a button to add the chosen fragrance to the shopping cart and another to view the contents of the shopping cart:
+Next let's put together the navigation bar and article for the detail view. We also need to include a toolbar after the article. This will hold a button to add the chosen fragrance to the shopping cart and another to view the contents of the shopping cart:
 
 ```
 <nav class='next' id='detailNavbar'>
@@ -420,7 +416,7 @@ Next lets put together the navbar and article for the detail view. We also need 
 </div>
 ```
 
-We need two templates here: one for the navbar to render the title and value of the Back button, and another to output the detail in the list. These templates again will be defined on the ids of the elements: "detailNavbar" and "fragranceDetail".
+We need two templates here: one for the navigation bar to render the title and value of the Back button, and another to output the detail in the list. These templates again will be defined on the ids of the elements: "detailNavbar" and "fragranceDetail".
 
 
 ```
@@ -428,7 +424,7 @@ app.detailNavbar = soma.template.create($('#detailNavbar')[0]);
 app.fragranceDetail = soma.template.create($('#fragranceDetail')[0]);
 ```
 
-Now we can define the `getChosenFragrance()` method on the scope of the chosen genre list. That way, when the user taps one of the fragrances, the app will navigate to the detail view and show all the details for that fragrance. We'll broadcast the relevant data and intercept it with some mediators to render the templates. The data will be an object with the title of the chosen genre and an object defining the chose fragrance:
+Now we can define the `getChosenFragrance()` method on the scope of the chosen genre list. That way, when the user taps one of the fragrances, the app will navigate to the detail view and show all the details for that fragrance. We'll broadcast the relevant data and intercept it with some mediators to render the templates. The data will be an object with the title of the chosen genre and an object defining the chosen fragrance:
 
 
 ```
@@ -442,9 +438,9 @@ app.available_fragrances.scope.getChosenFragrance = function(e) {
      return fragrance.sku === sku;
   });
 
-  //=========================
-  // Notify the navbar title:
-  //=========================
+  //=================================
+  // Notify the navigation bar title:
+  //=================================
   $.publish('chosen-fragrance', {title: app.fragrancesGenreTitle.scope.title, fragrance: chosenFragrance[0]});
 };
 ```
@@ -487,7 +483,7 @@ When this renders, we would get something like this:
 
 This detail list does not lead anywhere. However, in the toolbar we have two action buttons. One will add the current chosen fragrance to the shopping cart, the other will let us see what is in the shopping cart. To make the Add button aware of what the current fragrance is, we'll wire it up as a template and pass it the relevant information so that it can add the fragrance to the shopping cart. 
 
-In reality, the shopping cart is nothing but another template with an array of values that we update each time the user adds a fragrance. That's why we created the `app.purchases` array, to store those fragrances in the cart. If you were creating a real app, you'd also need a model to hold this information which you would persist on the server. Before we enable the Add button, let's put the navbar and article for the shopping cart in place:
+In reality, the shopping cart is nothing but another template with an array of values that we update each time the user adds a fragrance. That's why we created the `app.purchases` array, to store those fragrances in the cart. If you were creating a real app, you'd also need a model to hold this information which you would persist on the server. Before we enable the Add button, let's put the navigation bar and article for the shopping cart in place:
 
 ```
 <nav class="next">
@@ -525,7 +521,7 @@ In reality, the shopping cart is nothing but another template with an array of v
 </article>
 ```
 
-As you can see from this template, we'll need to initialize a template on the id of the Back button to render the value of the previous view, which was the chosen fragrance. For the shopping cart we're going to use the id of the article as the root scope of the template. Here's our template initializers:
+As you can see from this template, we'll need to initialize a template on the id of the Back button to render the value of the previous view, which would be the chosen fragrance. For the shopping cart we're going to use the id of the article as the root scope of the template. Here's our template initializers:
 
 
 ```
@@ -587,7 +583,7 @@ $('#shoppingCart').on('singletap', function() {
 });
 ```
 
-To complete the shopping cart, we need to define two scope methods, one to determine the total number of items the user has placed in the shopping cart and another to determine the total cost. If you look at the shopping cart template again, you'll find these two methods: `getTotalItems()` and `getTotalCost()`.
+To complete the shopping cart, we need to define two scoped methods, one to determine the total number of items the user has placed in the shopping cart and another to determine the total cost. If you look at the shopping cart template again, you'll find these two methods: `getTotalItems()` and `getTotalCost()`.
 
 
 ```
@@ -671,7 +667,7 @@ $('#cancelOrder').on('singletap', function() {
 
 The Cancel button will send the user back to the main screen using `$.UIGoBackToArticle('#main')` and it will set the purchases array to empty – `app.cart.scope.purchases = []` – and render the shopping cart template again so that it is empty.
 
-The Place Order button will direct the user to one more view, the confirmation page. This does nothing but display a confirmation code, the names of the items purcased and the total cost. Of course there is a back button in the navbar.
+The Place Order button will direct the user to one more view, the confirmation page. This does nothing but display a confirmation code, the names of the items purcased and the total cost. Of course there is a back button in the navigation bar.
 
 Here's the template for the confirmation view:
 
@@ -996,9 +992,9 @@ $(function () {
        return fragrance.sku === sku;
     });
 
-    //=========================
-    // Notify the navbar title:
-    //=========================
+    //=================================
+    // Notify the navigation bar title:
+    //=================================
     $.publish('chosen-fragrance', {title: app.fragrancesGenreTitle.scope.title, fragrance: chosenFragrance[0]});
   };
 

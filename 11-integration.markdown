@@ -289,24 +289,31 @@ If you want to be able to use ChocolateChip-UI's gestures as directives, you can
 
 
 ```
-///////////////////////////////////////////////////
-// Create directives for ChocolateChip-UI gestures.
-// Iterate over array of avaialable events:
-///////////////////////////////////////////////////
-['tap', 'singletap', 'longtap', 'doubletap', 'swipe', 'swipeleft', 
-'swiperight', 'swipeup', 'swipedown'].forEach(function(gesture) {
+//////////////////////////////////////////
+// Initialize the CCGestures modules to 
+// hold the event directives:
+//////////////////////////////////////////
+
+var CCGestures = angular.module('CCGestures',[]);
+
+///////////////////////////////////////////
+// Iterate over array of avaialable events
+// and add them to the CCGestures module:
+///////////////////////////////////////////
+["tap", "singletap", "longtap", "doubletap", "swipe", "swipeleft", 
+"swiperight", "swipeup", "swipedown"].forEach(function(gesture) {
 
   // Camel Case each directive:
   //===========================
-  var ccGesture = 'cc' + (gesture.charAt(0).toUpperCase() + gesture.slice(1));
+  var ccGesture = "cc" + (gesture.charAt(0).toUpperCase() + gesture.slice(1));
 
   // Create module for each directive:
   //==================================
-  angular.module(ccGesture,[]).directive(ccGesture, ['$parse',
+  CCGestures.directive(ccGesture, ["$parse",
     function($parse) {
       return {
         // Restrict to attribute:
-        restrict: 'A',
+        restrict: "A",
         compile: function ($element, attr) {
           // Define the attribute for the gesture:
           var fn = $parse(attr[ccGesture]);
@@ -330,7 +337,7 @@ With the above module imported into your app you can inject the gestures as foll
 
 
 ```
-var app = angular.module('MyApp', ['ccSingletap', 'ccDoubletap', 'ccSwipe']);
+var app = angular.module('MyApp', ['ccGesture']);
 ```
 
 With these injected into your app, you can then use them like normal Angularjs event directives:
