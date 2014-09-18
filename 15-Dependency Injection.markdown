@@ -2,7 +2,7 @@
 
 Dependency injection, or IOC (inversion of control), is a pattern for enabling  decoupled code. The code receiving the injection does not need to know about the actual code being injected. Once injected, you can use it inside as if it were part of the code.
 
-In essence, you could implement a composite pattern function that could consume another funtion. This would be very simple dependency injection. But dependency inject gets most useful when it’s implemented with a container, as this enables an application to have dependency inject built in. Large frameworks, like Angularjs, provide an IOC container by default. And there are some smaller frameworks, like Somajs, that provide this as well. You may create an app that does not have any dependencies, or with many, that’s your choice.
+In essence, you could implement a composite pattern function that could consume another function. This would be very simple dependency injection. But dependency inject gets most useful when it’s implemented with a container, as this enables an application to have dependency inject built in. Large frameworks, like Angularjs, provide an IOC container by default. And there are some smaller frameworks, like Somajs, that provide this as well. You may create an app that does not have any dependencies, or with many, that’s your choice.
 
 ChocolateChip-UI does not have any built in support for dependency injection, but it is not that hard to implement the basics. That’s what we’ll do in this post. We’ll start with the basic shell for our dependency injector:
 
@@ -337,6 +337,7 @@ This would result in the two controllers be executed with their dependencies, wh
 
 
 ```
+
 ```
 
 We could do more than simply use the IOC container for dependency injection. We can use it as the namespace for our app where we wire up events and evented mediators to handle user interaction with the UI. Let's add some markup and interactivity. We'll use ChocolateChip-UI's pub/sub function to create the data binding between an input element and a paragraph, which will be managed by a mediator:

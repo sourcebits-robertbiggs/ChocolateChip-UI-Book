@@ -1,10 +1,10 @@
 #Mediators, Pub/Sub and Data Binding
 
-Mediators are a really useful coding pattern to help organize and main a UI. A mediator is an object that represents another object. This object could be anything. When using a mediator with a user interface, a mediator usually represents the visual aspect of some interactive part of the interace. That way, if the user makes a choice while interacting with the UI, the mediator becomes aware and does something, such as updating the model, or persisting the model, or acquires other data relevant to the user's choice.
+Mediators are a really useful coding pattern to help organize and maintain a UI. A mediator is an object that represents another object. This object could be anything. When using a mediator with a user interface, a mediator usually represents the visual aspect of some interactive part of the interace. That way, if the user makes a choice while interacting with the UI, the mediator becomes aware and does something, such as updating the model, or persisting the model, or acquires other data relevant to the user's choice.
 
-The role of a mediator is to keep your view and your model completely separated. With proper mediators, you model doesn't need to know anything about how your view is built or works. Similarly, your view doesn't need to know anything about the model, where it comes from, how it gets data, or stores it, or validates it, or any other data related thing. 
+The role of a mediator is to keep your view and your model completely separated. With proper mediators, the model and view don't need to know anything about each other. 
 
-ChocolateChip-UI provides a very efficient way for mediators to communicate with the model and view without having to know to much about either. This can be done using the built-in `pub/sub` methods. Your model subscribes to broadcasts and publish broadcasts, and your view publishes broadcasts whenever the user interacts with it. The mediator can subscribe or publish as well, allowing it to update the view or interact with the model through the publication of broadcasts. At the moment this may not seem very useful and perhaps even a bit confusing, so we'll introduce some examples of how to set up a mediator with `pub/sub` broadcasts.
+ChocolateChip-UI provides a very efficient way for mediators to communicate with the model and view without having to know about either. This can be done using the built-in `pub/sub` methods. Your models subscribe to broadcasts and publish broadcasts, and your view publishes broadcasts whenever the user interacts with it. The mediator can subscribe or publish as well, allowing it to update the view or interact with the model through the publication of broadcasts. At the moment this may not seem very useful and perhaps even a bit confusing, so we'll introduce some examples of how to set up a mediator with `pub/sub` broadcasts.
 
 Here's the markup for our example. We want to bind the `h3` in the second list item to the input in the first list item, so that as the user enters data in the text input, the `h3` gets updated automatically.
 
@@ -15,8 +15,12 @@ Here's the markup for our example. We want to bind the `h3` in the second list i
 <article id="main" class="current">
   <section>
     <ul class="list">
-      <li><lable>Enter data:</lable> <input id='input-source' type='text'></li>
-      <li><h3 id='input-output'></h3></li>
+      <li><lable>Enter data:</lable> 
+        <input id='input-source' type='text'>
+      </li>
+      <li>
+        <h3 id='input-output'></h3>
+      </li>
     </ul>
   </section>
 </article>
@@ -48,7 +52,7 @@ var H3Mediator = $.subscribe('input-value-update', function(event, value) {
 ```
 
 
-Using the above mediator pattern, we could create as many mediators as we wanted, thousands even, without the input event handler needing to know that they exist. And we can modify the mediators or remove them without needing to update the event handler. Hopefully, this makes it clear why this pattern is so userful in app development. Imagine you had a lot of widgets on a page. Some widgets might need to be updated when the user interacted with others. Without mediators and publications, the widgets would need to know about each other and their code would be tangled together. With mediators and publications, no widget needs to know about any other widget. If you create you mediators with proper checks, you would be able to add and remove widgets without at problem.
+Using the above mediator pattern, we could create as many mediators as we want, thousands even, without the input event handler needing to know that they exist. And we can modify the mediators or remove them without needing to update the event handler. Hopefully, this makes it clear why this pattern is so userful in app development. Imagine you had a lot of widgets on a page. Some widgets might need to be updated when the user interacted with others. Without mediators and publications, the widgets would need to know about each other and their code would be tangled together. With mediators and publications, no widget needs to know about any other widget. If you create your mediators with proper checks, you would be able to add and remove widgets without at problem.
 
 For most inputs, the `input` event is sufficient to capture any changes in their values. However, select boxes are different. Let's take a look at how to handle a select box.
 
