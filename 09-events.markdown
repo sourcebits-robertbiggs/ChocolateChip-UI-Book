@@ -108,5 +108,124 @@ ChocolateChip-UI has some features that are implemented for desktop compatibiliy
 
 ChocolateChip-UI also has touch states defined for many interactive elements. This is done by putting the class `touched` or `selected` on the element. Unfortunately, because of the the sluggishness of mobile browsers and the need to use singletaps, sometimes the element may execute its intended action before the browser has time to render its selected state. I know, I can sense you disappointment. It has been gnawing at me for a long time. I'm always hoping I can figure out a reasonable workaround but haven't been able to find one yet.
 
+###Using ChocolateChip-UI Events with Angularjs
 
+If you want to use Anguljarjs 1.x with ChocolateChip-UI, you can create a plugin that exposes ChocolateChip-UI's events as directives that you can include in your app through dependency injection. Angularjs has a module called `ngTouch`, however this is quite limited in what it offers and is not compatible with ChocolateChip-UI. In order to be able to use ChocolateChip-UI's events with Angularjs, we need to create directives. Our directive will have the following format:
+
+```
+<p cc-singletap='doSomething()'>Click</p>
+```
+
+We will therefore create the following directives:
+
+
+- cc-tap
+- cc-singletap
+- cc-longtap
+- cc-doubletap
+- cc-swipe
+- cc-swipeleft
+- cc-swiperight
+- cc-swipeup
+- cc-swipedown
+
+Because this is a lot of events, we want to find a way to create them all at once with a factory pattern. 
+
+ The best approach is to create a module that contains all the gesture directives. That you can use Angular's dependency injection to include the directives in your app instance with one module. Since the code to create each event directive would be identical, we can DRY the process by using a factory pattern. In this case we can create an array of the event names and use that to produce the directives. Without further ado, here it is:
+
+```
+//////////////////////////////////////////
+// Initialize the CCGestures modules to 
+// hold the event directives:
+//////////////////////////////////////////
+
+var CCGestures = angular.module('CCGestures',[]);
+
+///////////////////////////////////////////
+// Iterate over array of avaialable events
+// and add them to the CCGestures module:
+///////////////////////////////////////////
+["tap", "singletap", "longtap", "doubletap", "swipe", "swipeleft", 
+"swiperight", "swipeup", "swipedown"].forEach(function(gesture) {
+
+  // Camel Case each directive:
+  //===========================
+  var ccGesture = "cc" + (gesture.charAt(0).toUpperCase() + gesture.slice(1));
+
+  // Create module for each directive:
+  //==================================
+  CCGestures.directive(ccGesture, ["$parse",
+    function($parse) {
+      return {
+        // Restrict to attribute:
+        restrict: "A",
+        compile: function ($element, attr) {
+          // Define the attribute for the gesture:
+          var fn = $parse(attr[ccGesture]);
+          return function ngEventHandler(scope, element) {
+            // Register event for directive:
+            $(element).on(gesture, function (event) {
+              scope.$apply(function () {
+                fn(scope, {$event: event});
+              });
+            });
+          };
+        }
+      };
+    }
+  ]);
+});
+```
+
+In the above code we've defined a module named `CCGestures`. This is the guy you'll inject in your app. Then we loop over an array of ChocolateChip-UI gesture names and create directives on that module. Incude this code in your app before your app instantiation. Then you can include the module as normal:
+
+```
+var app = angular.module('MyApp', ['CCGestures']);
+```
+
+Having done this, you can then use the ChocolateChip-UI gesture directives in your markup to create the mobile user interactions you need.
+
+```
+<ul class='list' id='chosePerfumeGenre' ng-controller='pefumeCtrl'>
+  <li cc-singletap='getChosenPerfume(perfume)' data-goto='perfumeDetail' ng-repeat="perfume in perfumesCollection">{{perfume.title}}</li>
+</ul>
+```
+
+Because we pass the loop context `perfume` as a parameter of the `getChosenPerfume` method of `cc-singletap`, we will have access to it in our method. 
+
+
+```
+app.controller("pefumeCtrl", function ($scope) {
+  $scope.getChosenPerfume = function(perfume) {
+    // Update the scope with the chosen perfume:
+    $scope.chosenPerfume = perfume;
+  };
+}
+```
+
+
+###Using ChocolateChip-UI Events with Somajs
+
+Somajs is a very neat, small framework that enables you to write clean, decoupled code for your app. It was inspired by Angular, so it offers dependency injection and has injectors, mediators, commands, dispatchers, as well as a separate plugin for templates similar to Angular's scoped directives. Like angular, Somajs uses attribues in the markup to define directives, including events. These are called `data-events` because they use the HTML5 data attribute to implement them. We can easily add ChocolateChip-UI's events to Somajs as follows:
+
+```
+//////////////////////////
+// Define new data events:
+//////////////////////////
+['tap', 'singletap', 'longtap', 'doubletap', 'swipe', 'swipeleft', 'swiperight', 'swipeup', 'swipedown'].forEach(function(gesture) {
+  soma.template.settings.events['data-' + gesture] = gesture;
+
+});
+```
+
+This will allow us to set up a Soma template like this:
+
+
+```
+<ul class='list' id='fragranceGenres'>
+  <li class='nav data-cloak' data-singletap='getGenre()' data-goto='fragranceList' data-genre='{{genre}}' data-title='{{capitalize(genre)}}' data-repeat="genre in genres">
+    <h3>{{capitalize(genre)}}</h3>
+  </li>
+</ul>
+```
 

@@ -256,8 +256,100 @@ $('.sheet .list').on('singletap', '.button', function() {
 });
 ```
 
+###Editable Lists
+
+####(version 3.7.0 and later)
+
+You can turn any type of list into an editable list. This means you can enable users to rearrange or delete list items. You can choose whether to allow both or only one of these depending on your need. You just need to pass in the necessary options to the constructor. You can use the following options to customize the editable list:
+
+```
+var options = {
+  editLabel : labelName,
+  doneLabel : labelName,
+  deleteLabel : labelName,
+  callback : callback (Tapping "Done" fires this),
+  deletable: false (no deletables),
+  movable: false (no movables)
+}
+```
+
+The defaults for these are as follows, so if you want something different, you will need to override them by supplying your own values as options:
+
+```
+editLabel : 'Edit',
+doneLabel : 'Done',
+deleteLabel : 'Delete',
+callback : $.noop,
+deletable: true,
+movable: true
+```
+
+If we set deletable to false, the list will only allow the user to change the order of list items. Or iff we set movable to false, then the user would only be to delete list items. If we wanted the buttons to have different names, especially for localization, we would need to supply those as options:
+
+```
+var options = {
+  editLabel : 'Editar',
+  doneLabel : 'OK',
+  deleteLabel : 'Eliminar'
+}
+```
+
+To initialize the list, you execute `UIEditList` directly on it:
+
+```
+$('#myList').UIEditList({
+  // options here
+});
+```
+
+To do something when the user deletes an item, you can pass a callback:
+
+```
+$('#myList').UIEditList({
+  callback : function(item) {
+    alert('You deleted item: ' $('item').text());
+  }
+});
+```
+
+Here's a more complex callback to store the results in localStorage:
+
+```
+$('#editList').UIEditList({
+  // Define callback for "Done" button:
+  callback: function(item) {
+    var text = $(item).siblings('h3').text();
+    $('#response').html('You deleted: ' + text + '');
+    var tempArray = [];
+    $('#editList').find('li').each(function(_, ctx) {
+      tempArray.push($(ctx).attr('data-list-item-value'));
+    });
+    tempArray = "'" + JSON.stringify(tempArray) + "'";
+    try {
+      localStorage.setItem('chosen-items', tempArray);
+    } catch(err) {
+      return
+    }
+  }  
+});
+```
+
+Here is the list activated, notice the move indicators on the right:
+
+![Deletable list with Edit button](images/widgets/EditableList-1.png)
+
+Here are the delete buttons showing, you can show them by tapping the red indicators on the right or by swiping to the left. If the language is right-to-left, then the swipe will be to the right.
+
+![Deletable list with Edit button](images/widgets/EditableList-2.png)
+
+Here you can see that one of the items has been moved down. This is accomplished by tapping on one of the move indicators. By tapping the upward arrow, the item moves up, tapping the downward arrow, the item moves down.
+
+![Deletable list with Edit button](images/widgets/EditableList-4.png)
+
 
 ###Deletable Lists
+
+####(version 3.6.3 and earlier)
 
 You can turn any type of list into a deletable list, enabling the user to delete its list items. You simply execute the method `$.UIDeletable`, passing it options with a selector for the list and an optional callback to execute when an item is deleted. 
 

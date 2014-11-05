@@ -2588,7 +2588,7 @@ word.capitalize(); // returns 'Chocolate'
 
 ###"".capitalizeAll
 
-This method will capitalize the first letter of each word in a string.
+This method will capitalize every word in a string.
 
 ```
 var name = $.capitalize("get out now"); // returns 'Get Out Now'
