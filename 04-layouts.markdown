@@ -861,7 +861,7 @@ This list would look like this:
 
 ###Buttons: Types and Placement
 
-Besides layouts, ChocolateChip-UI provides a number of button types and ways of positioning them in layouts. A button is just an anchor tag with the class button. 
+Besides layouts, ChocolateChip-UI provides a number of button types and ways of positioning them in layouts. From version 3.8.0 and forward, a button is just a button. For earlier versions, a button is an anchor tag with the class button. 
 
 ####Default Buttons
 
@@ -870,7 +870,7 @@ Depending on what platform you are on, you will get the default look. The markup
 ```
 <ul class='list'>
   <li>
-    <a href="#" class='button'>Button</a>
+    <button>Button</button>
   </li>
 </ul>
 ```
@@ -898,7 +898,7 @@ You don't have to worry about implementing this button's look. Just put the clas
 
 ```
 <nav class='next'>
-  <a href='#' class='button back'>My App</a>
+  <button class='back'>My App</button>
   <h1>People</h1>
 </nav>
 <article id="people" class='next'>
@@ -932,7 +932,7 @@ To learn more about how back buttons work with navigation, please read the chapt
 
 ####Action Buttons
 
-ChocolateChip-UI provides a special type of button called an action button. These will usually sit by themselves on the screen. Their purpose is to enable the user to perform some very important function. You implement them by putting the class `action` on an anchor tag:
+ChocolateChip-UI provides a special type of button called an action button. These will usually sit by themselves on the screen. Their purpose is to enable the user to perform some very important function. You implement them by putting the class `action` on a button element:
 
 ```
 <article id='main' class='current'>
@@ -943,7 +943,7 @@ ChocolateChip-UI provides a special type of button called an action button. Thes
       </li>
     </ul>
     <br><br>
-    <a id='goToLast' href='javascript:void(null)' class="button action">Straight to Detail Article</a>
+    <button id='goToLast' href='javascript:void(null)' class="action">Straight to Detail Article</a>
   </section>
 </article>
 ```

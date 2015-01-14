@@ -284,7 +284,7 @@ Before we define the `getGenre()`, we need to create the template that it will a
 
 ```
 <nav class='next'>
-  <a href='#' class='button back'>Fragrances</a>
+  <button class='back'>Fragrances</button>
   <h1 id='fragrancesGenreTitle'>{{title}}</h1>
 </nav> 
 <article class='next' id='fragranceList'>
@@ -394,7 +394,7 @@ Next let's put together the navigation bar and article for the detail view. We a
 
 ```
 <nav class='next' id='detailNavbar'>
-  <a href='#' class='button back' id='backToGenre'>{{genre_title}}</a>
+  <button class='back' id='backToGenre'>{{genre_title}}</button>
   <h1 id='detailTitle'>{{product_title}}</h1>
 </nav>
 <article class='next' id='detail'>
@@ -411,8 +411,8 @@ Next let's put together the navigation bar and article for the detail view. We a
   </section>
 </article>
 <div class='toolbar next'>
-  <a href="javascript:void(null)" id='addToCart' class="button add"></a>
-  <a href="javascript:void(null)" data-disabled="{{disabled}}" id="shoppingCart" class="button align-flush"></a>
+  <button id='addToCart' class="add"></button>
+  <button data-disabled="{{disabled}}" id="shoppingCart" class="align-flush"></button>
 </div>
 ```
 
@@ -487,7 +487,7 @@ In reality, the shopping cart is nothing but another template with an array of v
 
 ```
 <nav class="next">
-  <a href='#' class='button back' id='backToFragrance'>{{fragranceName}}</a>
+  <button class='back' id='backToFragrance'>{{fragranceName}}</button>
   <h1>Cart</h1>
 </nav>
 <article id="cart" class="next">
@@ -514,8 +514,8 @@ In reality, the shopping cart is nothing but another template with an array of v
       </li>
     </ul>
     <div id='orderButtons'>
-      <a id="placeOrder" href="#" class="button action">Place Order</a>
-      <a id="cancelOrder" href="#" class="button action">Cancel Order</a>
+      <button id="placeOrder" class="action">Place Order</button>
+      <button id="cancelOrder" class="action">Cancel Order</button>
     </div>
   </section>
 </article>
@@ -674,7 +674,7 @@ Here's the template for the confirmation view:
 
 ```
 <nav class="next">
-  <a href='#' class='button back' id='backToCart'>Cart</a>
+  <button class='back' id='backToCart'>Cart</button>
   <h1>Confirmation</h1>
 </nav>
 <article id="confirmation" class="next">
@@ -758,7 +758,7 @@ Depending on the items in the cart, the confirmation view might look like this:
     </section>
   </article> 
   <nav class='next'>
-    <a href='#' class='button back'>Fragrances</a>
+    <button class='back'>Fragrances</button>
     <h1 id='fragrancesGenreTitle'>{{title}}</h1>
   </nav> 
   <article class='next' id='fragranceList'>
@@ -782,7 +782,7 @@ Depending on the items in the cart, the confirmation view might look like this:
     </section>
   </article>
   <nav class='next' id='detailNavbar'>
-    <a href='#' class='button back' id='backToGenre'>{{genre_title}}</a>
+    <button class='back' id='backToGenre'>{{genre_title}}</button>
     <h1 id='detailTitle'>{{product_title}}</h1>
   </nav>
   <article class='next' id='detail'>
@@ -799,11 +799,11 @@ Depending on the items in the cart, the confirmation view might look like this:
     </section>
   </article>
   <div class='toolbar next'>
-    <a href="javascript:void(null)" id='addToCart' class="button add"></a>
-    <a href="javascript:void(null)" data-disabled="{{disabled}}" id="shoppingCart" class="button align-flush"></a>
+    <button id='addToCart' class="add"></button>
+    <button data-disabled="{{disabled}}" id="shoppingCart" class="align-flush"></button>
   </div>
   <nav class="next">
-    <a href='#' class='button back' id='backToFragrance'>{{fragranceName}}</a>
+    <button class='back' id='backToFragrance'>{{fragranceName}}</button>
     <h1>Cart</h1>
   </nav>
   <article id="cart" class="next">
@@ -830,13 +830,13 @@ Depending on the items in the cart, the confirmation view might look like this:
         </li>
       </ul>
       <div id='orderButtons'>
-        <a id="placeOrder" href="#" class="button action">Place Order</a>
-        <a id="cancelOrder" href="#" class="button action">Cancel Order</a>
+        <button id="placeOrder" class="action">Place Order</button>
+        <button id="cancelOrder" class="action">Cancel Order</button>
       </div>
     </section>
   </article>
   <nav class="next">
-    <a href='#' class='button back' id='backToCart'>Cart</a>
+    <button href='#' class='back' id='backToCart'>Cart</button>
     <h1>Confirmation</h1>
   </nav>
   <article id="confirmation" class="next">
@@ -1140,4 +1140,4 @@ $(function () {
 ```
 
 
-Please go to our Github account and download the [complete project](https://github.com/sourcebits-robertbiggs/Fragranz) so you can run it and see how it all works together.
+Please go to our Github account and download the [complete project](https://github.com/chocolatechipui/Fragranz) so you can run it and see how it all works together.

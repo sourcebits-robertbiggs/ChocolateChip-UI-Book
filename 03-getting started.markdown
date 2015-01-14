@@ -169,3 +169,34 @@ gulp js ios && gulp watch_ios
 ```
 gulp js win && gulp watch_win
 ```
+
+###Building with ChocolateChipJS
+
+ChocolateChip-UI is built to run on jQuery, the popular and well-know JavaScript library. However, ChocolateChip-UI can optionally run on ChocolateChipJS. This is a mobile-first JavaScript library written to be small and fast, as much as 30% faster than jQuery. If you find that with jQuery your app's interactions feel sluggish, you might want to try using ChocolateChipJS. It's easy to build out examples of ChocolateChip-UI using ChocolateChipJS. Just pass Gulp the flag: --chocolatechipjs:
+
+
+```
+// Build everything, including examples with ChocolateChipJS instead of jQuery:
+gulp --chocolatechipjs
+
+// Build only the Android examples and demos with ChocolateChipJS instead of jQuery:
+gulp android_examples --chocolatechipjs
+
+// Build only the iOS examples and demos with ChocolateChipJS instead of jQuery:
+gulp ios_examples --chocolatechipjs
+
+// Build only the Windows examples and demos with ChocolateChipJS instead of jQuery:
+gulp win_examples --chocolatechipjs
+
+// Build the right-to-left version with ChocolateChipJS:
+gulp --dir rtl --chocolatechipjs
+
+// Build only the Android right-to-left examples with ChocolateChipJS:
+gulp android_examples --dir rtl
+
+// Build only the iOS right-to-left examples with ChocolateChipJS:
+gulp ios_examples --dir rtl
+
+// Build only the Windows right-to-left examples with ChocolateChipJS:
+gulp win_examples --dir rtl
+```

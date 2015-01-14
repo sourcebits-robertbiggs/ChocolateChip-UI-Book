@@ -26,7 +26,7 @@ Here's the markup for our example. We want to bind the `h3` in the second list i
 </article>
 ```
 
-We could do this with an event handler on the input. However, this is spaghetti code. If we had lots of form elements, this would get complicated. And each time we wanted to make a change to our UI, we'd need to update our input event listeners. This would lead to maintenance issues with complex UIs. Here's an example of an event handler that will update the h3 when the user inputs text:
+We could make this markup work with an event handler on the input. However, this is spaghetti code. If we had lots of form elements, this would get complicated. And each time we wanted to make a change to our UI, we'd need to update our input event listeners. This would lead to maintenance issues with complex UIs. Here's an example of an event handler that will update the h3 when the user inputs text:
 
 ```
 $('#input-source').on('input', function(e) {

@@ -203,8 +203,8 @@ To make a paging control, you first need to have the necessary markup for the pa
 <nav>
    <h1>Paging</h1>
    <div class='segmented paging horizontal align-flush'>
-     <a class='button' href='javascript:void(null)' title='previous panel'></a>
-     <a class='button' href='javascript:void(null)' title='next panel'></a>
+     <button title='previous panel'></button>
+     <button title='next panel'></button>
    </div>
 </nav>
 <article id="main" class="current paging">

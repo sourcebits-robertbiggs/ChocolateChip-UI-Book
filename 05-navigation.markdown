@@ -116,7 +116,7 @@ We're going to look at what it takes to make a dynamic navigation list for some 
   </section>
 </article>
 <nav class="next">
-  <a href="#" class="button back">Recipes</a>
+  <button href="#" class="back">Recipes</button>
   <h1 id='recipeTitle'>Recipe</h1>
 </nav>
 <article id="detail" class="next">
@@ -271,19 +271,19 @@ $(function() {
 Based on the above code, here is some CSS to style the tab buttons with icons for iOS:
 
 ```
-.tabbar > .button.music > .icon  {
+.tabbar > button.music > .icon  {
    -webkit-mask-image: url('../images/icons/Head_phones.svg');
 }
-.tabbar > .button.pictures > .icon  {
+.tabbar > button.pictures > .icon  {
    -webkit-mask-image: url('../images/icons/Camera.svg');
 }
-.tabbar > .button.documents > .icon  {
+.tabbar > button.documents > .icon  {
    -webkit-mask-image: url('../images/icons/Documents.svg');
 }
-.tabbar > .button.downloads > .icon  {
+.tabbar > button.downloads > .icon  {
    -webkit-mask-image: url('../images/icons/Download.svg');
 }
-.tabbar > .button.favorites > .icon  {
+.tabbar > button.favorites > .icon  {
    -webkit-mask-image: url('../images/icons/Favorite.svg');
 }    
 ```
@@ -305,15 +305,15 @@ The icon for the 'More' tab is an SVG data url on Android and iOS. On Windows it
 
 ```
 /* Android: */
-.tabbar > .button.more::before { 
+.tabbar > button.more::before { 
   background-color: red;
 }
 /* iOS: */
-.tabbar > .button.more > .icon {
+.tabbar > button.more > .icon {
   background-color: red;
 }
 /* Windows Phone 8: */
-.tabbar > .button.more::before {
+.tabbar > button.more::before {
   color: red;
 ```
 
@@ -335,9 +335,9 @@ To set up togglable panels you need to execute the function `UIPanelToggle` on a
       <div class='horizontal centered'>
         <!-- segmented control for toggling panels  -->
         <div class='segmented'>
-            <a class='button'>Radioactive</a>
-            <a class='button'>Hurt</a>
-            <a class='button'>Permanent</a>
+            <button>Radioactive</button>
+            <button>Hurt</button>
+            <button>Permanent</button>
         </div>
       </div>
       <!-- Container for togglable panels -->
@@ -432,8 +432,8 @@ In that article's navbar put a segmented control with the extra class of `paging
 
 ```
 <div class='segmented paging horizontal align-flush'>
-   <a class='button' href='javascript:void(null)' title='previous panel'></a>
-   <a class='button' href='javascript:void(null)' title='next panel'></a>
+   <button title='previous panel'></button>
+   <button title='next panel'></button>
 </div>
 ```
 

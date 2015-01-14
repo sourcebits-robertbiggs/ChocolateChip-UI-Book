@@ -8,14 +8,14 @@ ChocolateChip-UI provides you with a number of useful widgets, such as popups, p
 
 The segmented control is a group of buttons for executing a small set of related tasks. The segmented control is also used for toggleing panels and paging sections, which are both descibed in the chapter "Navigation".
 
-There are two ways to create a segmented control, manually or dynamically. The segmented control is just a div with the class `segmented` which contains several anchors with the class `button`:
+There are two ways to create a segmented control, manually or dynamically. The segmented control is just a div with the class `segmented` which contains several buttons:
 
 
 ```
 <div class='segmented'>
-  <a class='button selected'>Radioactive</a>
-  <a class='button'>Hurt</a>
-  <a class='button'>Permanent</a>
+  <button class='selected'>Radioactive</button>
+  <button>Hurt</button>
+  <button>Permanent</button>
 </div>
 ```
 
@@ -223,12 +223,12 @@ $(function() {
    $.UISheet();
 
    // Get the sheet and append some markup:
-   $('.sheet').find('section').append("<ul class='list'></li><li><a class='button' href='javascript:void(null)'>Save</a></li><li><a class='button' href='javascript:void(null)'>Delete</a></li><li><a class='button' href='javascript:void(null)'>Cancel</a></li></ul>");
+   $('.sheet').find('section').append("<ul class='list'></li><li><button>Save</button></li><li><button>Delete</button></li><li><button>Cancel</button></li></ul>");
    $('.sheet .list').append ('<h2 style="text-align: center; margin: 20px;">The End</h2>');
 
    // After append the sheet to the document,
    // register an event to handle the buttons, etc.:
-   $('.sheet .list').on('singletap', '.button', function() {
+   $('.sheet .list').on('singletap', 'button', function() {
       $.UIHideSheet();
    });
 
@@ -251,7 +251,7 @@ $('#showSheet').on('singletap', function() {
 The sheet is created with a chevron inside its top bar which when tapped will close it. Inside the sheet you can wire up buttons or other elements to close it using the method `$.UIHideSheet`:
 
 ```
-$('.sheet .list').on('singletap', '.button', function() {
+$('.sheet .list').on('singletap', 'button', function() {
    $.UIHideSheet();
 });
 ```

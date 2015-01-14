@@ -58,7 +58,7 @@ The nav tag creates a navbar used to hold the article's title, as well as any in
 ```
 <nav class='current'>
    <h1>My App</h1>
-   <a class='button' id='editButton'>Edit</a>
+   <button id='editButton'>Edit</button>
 </nav>
 ```
 
@@ -204,11 +204,11 @@ By default the h2 before a list is always in uppercase. Putting this class on it
 
 ###button
 
-This class is placed on an anchor tag to mark it as a button. The button will be styled appropriately for the device's operating system.
+As of version 3.8.0 a button is created by using a button element. Earlier versions used an anchor tag with the class button. Regardless of the version, the button will be styled appropriately for the device's operating system.
 
 
 ```
-<a href='whatever' class='button'>Whatever</a>
+<button>Whatever</button>
 ```
 
 ####Back &amp; BackTo Buttons
@@ -225,7 +225,7 @@ A back button:
 
 ```
 <nav class='current'>
-   <a class='button back'>Back</a>
+   <button class='back'>Back</button>
    <h1>Candies</h1>
 </nav>
 ```
@@ -234,7 +234,7 @@ Or a backTo button:
 
 ```
 <nav class='current'>
-   <a class='button backTo'>Back</a>
+   <button class='backTo'>Back</button>
    <h1>Candies</h1>
 </nav>
 ```
@@ -244,9 +244,9 @@ When you put a button in the navbar and want it to be flush against the right si
 
 ```
 <nav class='current'>
-   <a class='button back'>Back</a>
+   <button class='back'>Back</button>
    <h1>Songs</h1>
-   <a class='button align-flush'>Edit</a>
+   <button class='align-flush'>Edit</button>
 </nav>
 ```
 
@@ -257,8 +257,8 @@ On iOS buttons have lost their background colors and borders. They merely exhibi
 
 ```
 <div>
-   <a href='#' class='button action'>Buy</a>;
-   <a href='#' class='button action'>Cancel</a>;
+   <button class='action'>Buy</button>;
+   <button class='action'>Cancel</button>;
 </div>
 ```
 
@@ -538,7 +538,7 @@ You never need to put a busy indicator tag in your document. ChocolateChip-UI ha
 
 ###segmented
 
-You can create a segmented control by putting the class `segmented` on a div. It should have at least two children, which must be links with the class `button`. Please be aware that mobile devices in portrait orientation may not be able to display segmented controls with more than three buttons. If you need to show more than three or four items, consider using a Paging control. At load time, ChocolateChip-UI initializes any segmented control markup so that the buttons select and deselect properly. You can also attach a delegate event to the segmented control to handle user interaction.
+You can create a segmented control by putting the class `segmented` on a div. It should have at least two children, which buttons. Please be aware that mobile devices in portrait orientation may not be able to display segmented controls with more than three buttons. If you need to show more than three or four items, consider using a Paging control. At load time, ChocolateChip-UI initializes any segmented control markup so that the buttons select and deselect properly. You can also attach a delegate event to the segmented control to handle user interaction.
 
 You can also create a segmented control dynamically using the `$.UICreateSegmented()` method. See ChUI.js for more details.
 
@@ -548,9 +548,9 @@ Example:
 ```
 <div style='' class='horizontal centered'>
    <div class='segmented'>
-      <a class='button'>Radioactive</a>
-      <a class='button'>Hurt</a>
-      <a class='button'>Permanent</a>
+      <button>Radioactive</button>
+      <button>Hurt</button>
+      <button>Permanent</button>
    </div>
 </div>
 ```
@@ -564,8 +564,8 @@ The class `paging` is used to implement a paging control. You put this on a segm
 <nav>
    <h1>Paging</h1>
    <div class='segmented paging horizontal align-flush'>
-      <a class='button' href='javascript:void(null)' title='previous panel'></a>
-      <a class='button' href='javascript:void(null)' title='next panel'></a>
+      <button title='previous panel'></button>
+      <button title='next panel'></button>
    </div>
 </nav>
 ```
@@ -691,8 +691,8 @@ A toolbar is a convenient container to hold buttons and icons that the user can 
   </section>
 </article>
 <div class="toolbar next">
-  <a class='button' href="javascript.void(null)">Food</a>
-  <a class='button' href="javascript.void(null)">Ingredients</a>
+  <button>Food</button>
+  <button>Ingredients</button>
 </div>
 ```
 
@@ -719,10 +719,10 @@ You create a sheet using the `$.UISheet()` method. Then populate it by inserting
 ```
 $.UISheet();
    $('.sheet').find('section').append("<ul class='list'></li>");
-   $('.sheet .list').append("<li><a class='button' href='javascript:void(null)'>Save</a></li><li><a class='button' href='javascript:void(null)'>Delete</a></li><li><a class='button' href='javascript:void(null)'>Cancel</a></li>");
+   $('.sheet .list').append("<li><button>Save</button></li><li><button>Delete</button></li><li><button>Cancel</button></li>");
    $('.sheet .list').append ('<h2 style="text-align: center; margin: 20px;">The End</h2>');
 
-$('.sheet .list').on('singletap', '.button', function() {
+$('.sheet .list').on('singletap', 'button', function() {
    $.UIHideSheet();
 });
 ```

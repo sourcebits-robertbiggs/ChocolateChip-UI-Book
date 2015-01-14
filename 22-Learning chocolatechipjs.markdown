@@ -34,10 +34,10 @@ Another big difference from jQuery is that ChocolateChipJS always returns the no
 
 ```
 // Returns the tag if it is an "a" tag:
-$('.button').is('a').css({'background-color': 'red'});
+$('button').is('a').css({'background-color': 'red'});
 
 // Returns the tag if it is not a list element:
-$('.button').isnt('li').css({'background-color': 'red'}); 
+$('button').isnt('li').css({'background-color': 'red'}); 
 
 // Returns the ul tag it if has list items:
 $('ul').has('li').css({'background-color': 'red'});
@@ -644,7 +644,7 @@ var checked = $('li').find('input').attr('checked');
 var checked = $('li').eq(0).find('input').attr('checked', 'checked');
 
 // Set the aria role of all buttons: 
-$('.button').attr('role', 'button');
+$('button').attr('role', 'button');
 ```
 
 ###removeAttr
@@ -1036,7 +1036,7 @@ This method will wrap the element in the provided markup. This method expects a 
 $('myList').wrap('<div class='menu'></div>');
 
 // Wrap all list icons in an anchor button:
-$('li').find('.icon').wrap('<a class="button" href="javascript:void(null)"></a>');
+$('li').find('.icon').wrap('<button></button>');
 ```
 
 
@@ -1200,7 +1200,7 @@ var checked = $('li').find('input').attr('checked');
 var checked = $('li').eq(0).find('input').attr('checked', 'checked');
 
 // Set the aria role of all buttons: 
-$('.button').attr('role', 'button');
+$('button').attr('role', 'button');
 ```
 
 
@@ -1281,7 +1281,7 @@ var buttonInteraction = function() {
   $(this).addClass('selected').css('border','solid 1px red');
 };
 // Bind event with buttonIneraction:
-$('.button').bind('singletap', buttonInteraction, false);
+$('button').bind('singletap', buttonInteraction, false);
 ```
 
 To get the event of the user interaction you can use any parameter inside the callback's parenthesis. This will give you access to the event object.
@@ -1289,7 +1289,7 @@ To get the event of the user interaction you can use any parameter inside the ca
 ```
 // We're using 'event' as the parameter,
 // you can use whatever you want:
-$('.button').bind('singletap', function(event) {
+$('button').bind('singletap', function(event) {
 // Log the event object:
 console.dir(event);
 // Get the name of the target element of the event:
@@ -1369,7 +1369,7 @@ This is a shortcut for both bind and delegate, as such the parameter order is di
 
 ```
 // Bind an event:
-$('.button').on('singletap', function() {
+$('button').on('singletap', function() {
   $(this).addClass('selected');
   // Output the name of the button to the #result element:
   $('#result').html($(this).text());

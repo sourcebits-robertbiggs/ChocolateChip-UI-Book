@@ -22,6 +22,7 @@ While we were in the planning stage, one of the things we wanted to accomplish w
 8. h1 - h5
 9. span
 10. a
+11. button
 
 ChocolateChip-UI uses a small number of classes with these tags to define their styles and to identify their functionality to ChUI.js so that it can intialize them at load time.
 
@@ -85,7 +86,7 @@ With ChocolateChip-UI you have everything you need to create a beautiful interfa
 
 ChocolateChip-UI was designed from the start to be resolution independent. The UI will always be rendered at the highest resolution available on the device. Its layouts are also responsive, they will resize automatically with orientation change and will expanding to fill the available screen real estate of all mobile devices. 
 
-####Compatible with Other Libaries and Frameworks
+####Compatibility with Other Libaries and Frameworks
 
 You can use ChocolateChip-UI with a wide variety of other libraries and frameworks. ChocolateChip-UI is built on top of jQuery, so anything that is jQuery compatible should work as is. Before attempting to use any jQuery plugins with ChocolateChip-UI do check the plugin documentation to make sure that it works on mobile. 
 
