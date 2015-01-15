@@ -219,8 +219,8 @@ ChocolateChip-UI provides sheets as a way for you to offer the user access to se
 
 ```
 $(function() {
-   // Create an empty sheet:
-   $.UISheet();
+   // Create an empty sheet with an id of "mySheet":
+   $.UISheet({id: "mySheet"});
 
    // Get the sheet and append some markup:
    $('.sheet').find('section').append("<ul class='list'></li><li><button>Save</button></li><li><button>Delete</button></li><li><button>Cancel</button></li></ul>");
@@ -239,22 +239,35 @@ $(function() {
 });
 ```
 
+Notice that if you will have more than one sheet in your app, you can distinguish them by initlizing them with unique ids. 
+
 After creating a sheet as illustrated above, you can show it by registering the `$.UIShowSheet` method on a user action:
 
 ```
 // Initialize button to show sheet:
 $('#showSheet').on('singletap', function() {
-  $.UIShowSheet();
+  $.UIShowSheet('#mySheet');
 });
 ```
 
-The sheet is created with a chevron inside its top bar which when tapped will close it. Inside the sheet you can wire up buttons or other elements to close it using the method `$.UIHideSheet`:
+Please note, if you have just one sheet in your app, executing `$.UIShowSheet()` without any arguments will show it. However, if you have more than one sheet, you will need to pass the method an id for each sheet. Of course you'll need to use the id that you provided when you initialized your sheets.
+
+By default, the sheet is created with a chevron inside its top bar which when tapped will close it. Inside the sheet you can wire up buttons or other elements to close it using the method `$.UIHideSheet`:
 
 ```
 $('.sheet .list').on('singletap', 'button', function() {
    $.UIHideSheet();
 });
 ```
+
+####Customize the Sheet
+
+You can eliminate the default handle in the sheet by passing the value: 
+
+```
+$.UISheet({id: 'mySheet', handle: false});
+```
+
 
 ###Editable Lists
 
