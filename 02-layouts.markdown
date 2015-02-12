@@ -943,7 +943,7 @@ ChocolateChip-UI provides a special type of button called an action button. Thes
       </li>
     </ul>
     <br><br>
-    <button id='goToLast' href='javascript:void(null)' class="action">Straight to Detail Article</a>
+    <button id='goToLast' class="action">Straight to Detail Article</a>
   </section>
 </article>
 ```

@@ -2,7 +2,7 @@
 
 ##Introduction to ChocolateChipJS
 
-ChocolateChipJS is an optional library for use with ChocolateChip-UI. It is similar to jQuery, but it is not a drop in replacement. There are many differences between the two. ChocolateChipJS was built for mobile devices, not for desktop use. It's therefore small and fast, up to 30% faster than jQuery at doing typical DOM manipulations which you would do in an app. It is up to four times faster than Zeptojs at DOM manipulation. You will notice the speed difference when you switch from one library to the other. Interactions with ChocolateChipJS make your app feel as responsive as native ones. jQuery, on the other hand, may appear somewhat sluggish. Because most developers only know and care about jQuery, we've made it the default for ChocolateChip-UI. However, if performance is important to you and your are experiencing some sluggish behavior with jQuery, consider trying ChocolateChipJS. It's not that different.
+[ChocolateChipJS](https://github.com/chocolatechipui/ChocolateChipJS) is an optional library for use with ChocolateChip-UI. It is similar to jQuery, but it is not a drop in replacement. There are many differences between the two. ChocolateChipJS was created shortly after the launch of the first iPhone for use on mobile devices, not for desktop use. It's therefore small and fast, up to 30% faster than jQuery at doing typical DOM manipulations which you would do in a mobile Web app. It is up to four times faster than Zeptojs at DOM manipulation. You will notice the speed difference when you switch from one library to the other. Interactions with ChocolateChipJS make your app feel as responsive as native ones. jQuery, on the other hand, may appear somewhat sluggish. Because most developers only know and care about jQuery, we've made it the default for ChocolateChip-UI. However, if performance is important to you and your are experiencing some sluggish behavior with jQuery, consider trying ChocolateChipJS. It's not that different.
 
 Let me repeat: ChocolateChipJS is not a drop in replacement for jQuery. If you have plugins or libraries that depend on jQuery, stick with jQuery. If you do not have any such jQuery dependencies and performance is a big deal for you, then do take a look at ChocolateChipJS.
 
@@ -2593,4 +2593,15 @@ This method will capitalize every word in a string.
 ```
 var name = $.capitalize("get out now"); // returns 'Get Out Now'
 ```
+
+##Support for ECMAScript 6 Promises
+
+ECMAScript 6 introduces native promises in JavaScript. These are quite different and incompatible with the current implementation of deferred objects in jQuery, which ChocolateChipJS mimics. In order to offer the ability to take advantage of native JavaScript promises, we've created a branch of ChocolateChipJS on Github called "Promises". If you switch to this branch and build ChocolateChipJS, you will get a version which lacks the jQuery compatible deferred object. In its place is support for native JavaScript promises, as well as a polyfill for browsers that do not yet support them.
+
+Because native promises function quite differently from jQuery deferred objects, we had to completely refactor the Ajax portion of ChocolateChipJS to work with these. In this branch, Ajax requests return native promises.
+
+###Promises
+
+Let's take a look at how ECMAScript 6 promises work.
+
 

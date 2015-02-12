@@ -116,7 +116,7 @@ We're going to look at what it takes to make a dynamic navigation list for some 
   </section>
 </article>
 <nav class="next">
-  <button href="#" class="back">Recipes</button>
+  <button class="back">Recipes</button>
   <h1 id='recipeTitle'>Recipe</h1>
 </nav>
 <article id="detail" class="next">
